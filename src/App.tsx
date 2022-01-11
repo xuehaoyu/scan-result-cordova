@@ -1,26 +1,63 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import ScanClient from './scan';
 import './App.css';
 
-function App() {
+interface IProps { }
+
+const App: React.FC<IProps> = (props: IProps) => {
+  const [scanClient] = useState<ScanClient>(
+    new ScanClient(undefined, {
+      width: 320,
+      height: 320,
+      positionX: (window.innerWidth - 300) / 2,
+      positionY: (window.innerHeight - 300) / 2,
+    }),
+  );
+  const [scaning, setScaning] = useState<boolean>(false);
+  const [scanResult, setScanResult] = useState<any>(null);
+
+  const onScanResult = async (result: any) => {
+    scanClient.destroy();
+    setScaning(false);
+    if (!result) return;
+    const { data } = result;
+    if (!data) return;
+    setScanResult(data)
+  };
+
+  const startScan = () => {
+    setTimeout(async () => {
+      try {
+        setScaning(true);
+        const result = await scanClient.scan();
+        await onScanResult(result);
+      } catch (e) {
+        setScaning(false);
+        scanClient.destroy();
+      }
+    }, 0);
+  };
+
+  useEffect(() => {
+    startScan();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className='app-page'>
+      <div
+        className="scan-body"
+      >
+        {scaning ? <span>等待扫码中...</span> : <span onClick={() => {
+          if (scaning) return;
+          startScan()
+        }}>点击重新扫码</span>}
+        <div
+          className="scan-area"
         >
-          Learn React
-        </a>
-      </header>
+          {scanResult && scanResult}
+        </div>
+      </div>
     </div>
   );
-}
-
-export default App;
+};
+export default App
