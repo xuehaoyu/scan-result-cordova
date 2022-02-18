@@ -24,7 +24,12 @@
 启动项目
 ### `npm test`
 测试
-### `npm run build`
-打包
 ### `npm run eject`
 打开webpack配置
+### `npm run build`
+打包
+### `npm run build-ios`
+打包ios
+### `npm run build-android`
+打包android
+
