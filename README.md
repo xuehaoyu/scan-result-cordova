@@ -1,46 +1,30 @@
-# Getting Started with Create React App
+# 简单的扫码结果呈现APP(Cordova)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 项目搭建流程
+1. react脚手架安装主项目
+2. cordova创建初始APP项目
+3. 移动cordova相关内容到react
+4. cordova根目录在WWW,所以更改react项目打包结果至WWW目录(可以更改默认buildPath或使用命令行)
+5. 参考官方文档, 添加cordova相关环境（例如: cordova platform add ios）
+6. 依据业务安装cordova相关插件
+7. 开发环境,打包app(Xocde/Android Studio)
 
-## Available Scripts
-
-In the project directory, you can run:
-
+## 环境注意项
+安卓根据cordova安装的环境构建版本，安装相应版本
+目录: platforms/android/build.gradle
+```
+    project.ext {
+      defaultBuildToolsVersion="29.0.2" //String
+      defaultMinSdkVersion=22 //Integer - Minimum requirement is Android 5.1
+      defaultTargetSdkVersion=29 //Integer - We ALWAYS target the latest by default
+      defaultCompileSdkVersion=29 //Integer - We ALWAYS compile with the latest by default
+    }
+```
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
+启动项目
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
+测试
 ### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
+打包
 ### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+打开webpack配置

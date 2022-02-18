@@ -9,6 +9,7 @@ export default class CameraScanner {
    */
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   static scan(params: any, resolve: any, reject: any, errorNotify?: (str: string, res: any) => void): void {
+    console.log('window.QRScanner_____', window.QRScanner)
     this.resolve = resolve;
     this.errorNotify = errorNotify;
     if (!window.QRScanner) return;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import ScanClient from './scan';
 import './App.css';
 
@@ -7,8 +7,8 @@ interface IProps { }
 const App: React.FC<IProps> = (props: IProps) => {
   const [scanClient] = useState<ScanClient>(
     new ScanClient(undefined, {
-      width: 320,
-      height: 320,
+      width: 300,
+      height: 300,
       positionX: (window.innerWidth - 300) / 2,
       positionY: (window.innerHeight - 300) / 2,
     }),
@@ -25,6 +25,11 @@ const App: React.FC<IProps> = (props: IProps) => {
     setScanResult(data)
   };
 
+  const closeScan = () => {
+    scanClient.destroy();
+    setScaning(false);
+  }
+
   const startScan = () => {
     setTimeout(async () => {
       try {
@@ -38,25 +43,24 @@ const App: React.FC<IProps> = (props: IProps) => {
     }, 0);
   };
 
-  useEffect(() => {
-    startScan();
-  }, []);
-
   return (
     <div className='app-page'>
       <div
         className="scan-body"
       >
-        {scaning ? <span>等待扫码中...</span> : <span onClick={() => {
-          if (scaning) return;
-          startScan()
-        }}>点击重新扫码</span>}
         <div
           className="scan-area"
         >
           {scanResult && scanResult}
         </div>
       </div>
+      <div className='restart-btn' onClick={() => {
+        if (scaning) {
+          closeScan()
+        } else {
+          startScan()
+        }
+      }}>{scaning ? '结束扫码' : '开始扫码'}</div>
     </div>
   );
 };

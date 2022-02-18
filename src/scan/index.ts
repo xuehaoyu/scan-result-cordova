@@ -22,12 +22,7 @@ export default class ScanClient {
    */
   constructor(bleAddress?: string, cameraOptions?: CameraOptions, types?: string[]) {
     if (!types || !types.length) {
-      types = ['hid'];
-      if (ScanClient.bleAddress && ScanClient.bleAddress !== 'undefined') {
-        types.push('bluetooth');
-      }
-    } else if (ScanClient.bleAddress && !~types.indexOf('bluetooth')) {
-      types.push('bluetooth');
+      types = ['camera'];
     }
     ScanClient.bleAddress = bleAddress || ScanClient.bleAddress || '';
     this.types = types;
