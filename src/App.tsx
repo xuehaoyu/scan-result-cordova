@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ScanClient from './scan';
 import './App.css';
 
@@ -42,6 +42,12 @@ const App: React.FC<IProps> = (props: IProps) => {
       }
     }, 0);
   };
+
+  useEffect(() => {
+    return () => {
+      closeScan()
+    }
+  })
 
   return (
     <div className='app-page'>
