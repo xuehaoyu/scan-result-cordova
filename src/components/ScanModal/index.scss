@@ -8,10 +8,16 @@
             max-height: 100%;
             border-radius: 0;
             overflow: hidden;
-            align-items: center;
-            justify-content: center;
-            .adm-modal-body{
+            .adm-modal-body {
                 padding: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .adm-modal-footer {
+                display: none;
             }
         }
     }

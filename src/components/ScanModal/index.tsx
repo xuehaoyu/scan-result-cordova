@@ -60,6 +60,7 @@ const ScanPage: React.FC<IProps> = (props: IProps) => {
       className='scan-modal'
       visible={visible}
       showCloseButton
+      actions={[]}
       onClose={() => {
         onClose()
       }}
