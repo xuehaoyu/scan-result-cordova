@@ -1,19 +1,20 @@
-import React from 'react'
-import { SafeArea, TabBar } from 'antd-mobile'
+import React, { useEffect } from 'react'
+import { TabBar } from 'antd-mobile'
 import {
   AppOutline,
   AppstoreOutline,
   ShopbagOutline
 } from 'antd-mobile-icons'
-import { Outlet, useSearchParams, useNavigate, NavigateFunction } from 'react-router-dom'
+import { Outlet, useNavigate, NavigateFunction } from 'react-router-dom'
 import './index.scss'
 
 interface IProps { }
 
 const Index: React.FC<IProps> = (props: IProps) => {
-  const params: any = useSearchParams()
+  const matchs = document.location.pathname.match(/^\/([^/]*)\/?/)
+  const pathState = matchs ? matchs[1] : ''
   const navigate: NavigateFunction = useNavigate()
-  console.log('params_____', params)
+
   const tabs = [
     {
       key: 'home',
@@ -32,6 +33,12 @@ const Index: React.FC<IProps> = (props: IProps) => {
     }
   ]
 
+  useEffect(() => {
+    if (!pathState) {
+      navigate('/home')
+    }
+  }, [])
+
   return (
     <div className='layout-page'>
       <div className='layout-page-body'>
@@ -39,9 +46,10 @@ const Index: React.FC<IProps> = (props: IProps) => {
       </div>
       <div className='layout-page-footer'>
         <TabBar
-         onChange={(val: any) => {
-           navigate(`/${val}`)
-         }}>
+          activeKey={pathState}
+          onChange={(val: any) => {
+            navigate(`/${val}`)
+          }}>
           {tabs.map(item => (
             <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
           ))}
