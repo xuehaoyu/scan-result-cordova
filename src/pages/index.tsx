@@ -3,11 +3,9 @@ import { SafeArea, TabBar } from 'antd-mobile'
 import {
   AppOutline,
   AppstoreOutline,
-  ShopbagOutline,
-  UserOutline
+  ShopbagOutline
 } from 'antd-mobile-icons'
-import { Outlet, useParams, useSearchParams, useNavigate, NavigateFunction } from 'react-router-dom'
-import routerConfig from '@/router/config'
+import { Outlet, useSearchParams, useNavigate, NavigateFunction } from 'react-router-dom'
 import './index.scss'
 
 interface IProps { }
@@ -40,9 +38,10 @@ const Index: React.FC<IProps> = (props: IProps) => {
         <Outlet></Outlet>
       </div>
       <div className='layout-page-footer'>
-        <TabBar onChange={(val: any) => {
-          navigate(`/${val}`)
-        }}>
+        <TabBar
+         onChange={(val: any) => {
+           navigate(`/${val}`)
+         }}>
           {tabs.map(item => (
             <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
           ))}
