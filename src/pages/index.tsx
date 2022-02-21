@@ -5,16 +5,15 @@ import {
   AppstoreOutline,
   ShopbagOutline
 } from 'antd-mobile-icons'
-import { Outlet, useNavigate, NavigateFunction } from 'react-router-dom'
+import { Outlet, useNavigate, NavigateFunction, useMatch } from 'react-router-dom'
 import './index.scss'
 
 interface IProps { }
 
 const Index: React.FC<IProps> = (props: IProps) => {
-  const matchs = document.location.pathname.match(/^\/([^/]*)\/?/)
-  const pathState = matchs ? matchs[1] : ''
+  const matchs = window.location.hash.match(/^#\/([^/]*)\/?/)
+  const pathState = matchs ? matchs[1] : 'home'
   const navigate: NavigateFunction = useNavigate()
-
   const tabs = [
     {
       key: 'home',
@@ -32,12 +31,6 @@ const Index: React.FC<IProps> = (props: IProps) => {
       icon: <AppstoreOutline />
     }
   ]
-
-  useEffect(() => {
-    if (!pathState) {
-      navigate('/home')
-    }
-  }, [])
 
   return (
     <div className='layout-page'>

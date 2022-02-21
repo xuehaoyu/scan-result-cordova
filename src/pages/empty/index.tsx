@@ -12,8 +12,8 @@ interface IProps { }
 
 const Index: React.FC<IProps> = (props: IProps) => {
   return (
-    <div className='layout-page'>
-      游戏待开放...
+    <div className='not-page'>
+      <h1>找不到该页面</h1>
     </div>
   )
 }

@@ -13,7 +13,7 @@ interface IProps { }
 const Index: React.FC<IProps> = (props: IProps) => {
   return (
     <div className='layout-page'>
-        待开放...
+        办公待开放...
     </div>
   )
 }
