@@ -41,7 +41,7 @@ const Index: React.FC<IProps> = (props: IProps) => {
         <TabBar
           activeKey={pathState}
           onChange={(val: any) => {
-            navigate(`/${val}`)
+            navigate(`/${val}`, { replace: true })
           }}>
           {tabs.map(item => (
             <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
