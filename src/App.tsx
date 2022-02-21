@@ -1,12 +1,16 @@
 import React from 'react'
-import ScanPage from './pages/scan'
+import { useRoutes } from 'react-router-dom'
+import routes from '@/router'
 import './App.css'
 
 interface IProps { }
 
 const App: React.FC<IProps> = (props: IProps) => {
+  const elements: any = useRoutes(routes)
   return (
-    <ScanPage />
+    <>
+      {elements}
+    </>
   )
 }
 export default App

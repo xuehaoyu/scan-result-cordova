@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import ScanClient from '@/scan'
+import { Modal } from 'antd-mobile'
 import './index.scss'
 
-interface IProps { }
+interface IProps {
+  visible: boolean,
+  onClose: () => void;
+}
 
 const ScanPage: React.FC<IProps> = (props: IProps) => {
+  const { visible, onClose } = props
   const [scanClient] = useState<ScanClient>(
     new ScanClient(undefined, {
       width: 300,
@@ -44,26 +49,36 @@ const ScanPage: React.FC<IProps> = (props: IProps) => {
   }
 
   useEffect(() => {
-    return () => {
+    if (!visible) {
       closeScan()
+    } else {
+      setScanResult(null)
     }
-  })
-
+  }, [visible])
   return (
-        <div className='scan-page'>
-            <div className="scan-body">
-                <div className="scan-area">
-                    {scanResult && scanResult}
-                </div>
-            </div>
-            <div className='restart-btn' onClick={() => {
-              if (scaning) {
-                closeScan()
-              } else {
-                startScan()
-              }
-            }}>{scaning ? '结束扫码' : '开始扫码'}</div>
+    <Modal
+      className='scan-modal'
+      visible={visible}
+      showCloseButton
+      onClose={() => {
+        onClose()
+      }}
+      content={<>
+        <div className='scan-body'>
+          <div className='scan-area'>
+            {scanResult && scanResult}
+          </div>
         </div>
+        <div className='restart-btn' onClick={() => {
+          if (scaning) {
+            closeScan()
+          } else {
+            startScan()
+          }
+        }}>{scaning ? '结束扫码' : '开始扫码'}</div>
+      </>}
+    >
+    </Modal>
   )
 }
 export default ScanPage
