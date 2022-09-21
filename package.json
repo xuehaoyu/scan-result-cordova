@@ -14,6 +14,7 @@
     "@types/react": "^17.0.50",
     "@types/react-dom": "^17.0.17",
     "antd-mobile": "^5.23.0",
+    "axios": "^0.27.2",
     "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.5",
     "babel-plugin-named-asset-import": "^0.3.8",
@@ -76,6 +77,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.31.8",
+    "http-proxy-middleware": "^2.0.6",
     "node-sass": "^7.0.3",
     "sass-loader": "^12.6.0"
   },
