@@ -1,11 +1,4 @@
 import React from 'react'
-import { Badge } from 'antd-mobile'
-import {
-  AppOutline,
-  AppstoreOutline,
-  ShopbagOutline,
-  UserOutline
-} from 'antd-mobile-icons'
 import './index.scss'
 
 interface IProps { }

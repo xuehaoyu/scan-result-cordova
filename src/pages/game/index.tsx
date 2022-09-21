@@ -1,19 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Badge } from 'antd-mobile'
-import {
-  AppOutline,
-  AppstoreOutline,
-  ShopbagOutline,
-  UserOutline
-} from 'antd-mobile-icons'
+import { SheepModal } from '@/components'
 import './index.scss'
 
 interface IProps { }
 
 const Index: React.FC<IProps> = (props: IProps) => {
+  const [sheepVisible, setSheepVisible] = useState<boolean>(false)
   return (
-    <div className='layout-page'>
-      游戏待开放...
+    <div className='game-page'>
+      <div className='feature-list'>
+        <div className='feature-item' onClick={() => {
+          setSheepVisible(true)
+        }}>🐑</div>
+      </div>
+      <SheepModal visible={sheepVisible} onClose={() => setSheepVisible(false)}></SheepModal>
     </div>
   )
 }
